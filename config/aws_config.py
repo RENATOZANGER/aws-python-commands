@@ -1,6 +1,6 @@
 import boto3
 from botocore.exceptions import NoCredentialsError, ProfileNotFound, UnauthorizedSSOTokenError, TokenRetrievalError
-from aws_utils.aws_profiles import listar_perfis_aws
+from aws_utils.aws_profiles import list_aws_profiles
 from aws_utils.sso_login import login
 
 PROFILE_NAME = "user_admin"
@@ -22,7 +22,7 @@ def get_session():
 
     except ProfileNotFound:
         print(f"❌ Profile '{PROFILE_NAME}' not found. Check the name in the AWS CLI.")
-        perfis = listar_perfis_aws()
+        perfis = list_aws_profiles()
         if perfis:
             print(f"Available profiles:", ", ".join(perfis))
         else:
