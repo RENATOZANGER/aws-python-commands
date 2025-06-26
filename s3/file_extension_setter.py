@@ -5,7 +5,11 @@ from config.aws_config import get_session
 
 def set_file_extension_based_on_content_type(s3_client, bucket_name: str, file_path: str) -> None:
     """
-    Set the file extension based on the content type of an object in S3 and download it.
+    Downloads a file from Amazon S3 and automatically adds the extension to the local file name
+    based on its Content-Type.
+    
+    If the Content-Type is recognized, the function attempts to add the appropriate extension
+    (e.g. .json, .txt, .csv) to the name of the locally saved file.
     """
     try:
         response = s3_client.head_object(Bucket=bucket_name, Key=file_path)
