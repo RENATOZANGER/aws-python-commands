@@ -22,7 +22,7 @@ def start_stepfunctions(client, state_machine_arn, input_dict):
 
 if __name__ == "__main__":
     stepfunctions_client = get_session().client('stepfunctions')
-    state_machine_arn = "arn:aws:states:us-east-1:123456789012:stateMachine:MyStateMachine"  # Substitua pelo real
+    state_machine_arn = "arn:aws:states:us-east-1:123456789012:stateMachine:MyStateMachine"
 
     input_dict = {
         "name": "fake",
