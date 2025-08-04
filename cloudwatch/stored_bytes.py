@@ -2,6 +2,7 @@ from config.aws_config import get_session
 
 
 def list_log_groups_sorted_by_stored_bytes(client):
+    """ Lists all CloudWatch log groups sorted by the amount of stored bytes in descending order. """
     log_group = []
     next_token = None
     try:
@@ -40,4 +41,4 @@ def list_log_groups_sorted_by_stored_bytes(client):
     
 
 if __name__ == "__main__":
-    logs = list_log_groups_sorted_by_stored_bytes(get_session().client('logs'))
+    list_log_groups_sorted_by_stored_bytes(get_session().client('logs'))
