@@ -1,6 +1,8 @@
+import os
+
 import boto3
 from botocore.exceptions import NoCredentialsError, ProfileNotFound, UnauthorizedSSOTokenError, TokenRetrievalError
-from aws_utils.aws_profiles import list_aws_profiles
+from aws_utils.aws_list_profiles import list_aws_profiles
 from aws_utils.sso_login import login
 
 PROFILE_NAME = "user_admin"
@@ -31,7 +33,13 @@ def get_session():
     
 
     except UnauthorizedSSOTokenError:
-        print("❌ SSO token expired. Please run 'aws sso login' to renew.")
+        print("❌ SSO token expired. Logging in to renew the token...")
+        os.system("aws sso login --profile renato_admin")
+        if login(PROFILE_NAME):
+            print("🔄 SSO token renewed successfully.")
+            return get_session()
+        else:
+            print("❌ Failed to renew SSO token. Please check your credentials or SSO configuration.")
         raise
 
     except NoCredentialsError:
