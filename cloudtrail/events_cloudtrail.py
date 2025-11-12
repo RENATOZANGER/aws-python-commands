@@ -40,7 +40,7 @@ def filter_events_by_name_and_time(client, event_name, start_time, end_time):
 if __name__ == "__main__":
     client = get_session().client('cloudtrail')
     event_name = 'GetParameter'
-    end_time = datetime.datetime.now()
+    end_time = datetime.datetime.utcnow()
     start_time = end_time - datetime.timedelta(hours=12)
     print(f"Fetching events for '{event_name}' from {start_time} to {end_time}...\n")
     
