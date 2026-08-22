@@ -37,27 +37,58 @@ Provide your SSO details when prompted:
 ---
 
 ## 🔑 Authentication
-### Once configured, authenticate daily or whenever your session expires:
+
+Once configured, authenticate daily or whenever your session expires.
+
+### Option A: Set default profile environment variable (Recommended)
+
+To avoid typing `--profile <name>` with every AWS CLI or Python command, set your active profile in your terminal session:
+
+- **Windows (PowerShell):**
+  ```powershell
+  $env:AWS_PROFILE="<your-profile-name>"
+  ```
+- **Windows (CMD):**
+  ```cmd
+  set AWS_PROFILE=<your-profile-name>
+  ```
+- **Linux / macOS / Git Bash:**
+  ```bash
+  export AWS_PROFILE=<your-profile-name>
+  ```
+
+Now you can authenticate and check your identity without extra flags:
+
 ```bash
-aws sso login --profile renato_admin
+aws sso login
+aws sts get-caller-identity
 ```
 
-Verify your active identity:
+---
+
+### Option B: Using explicit profile flag
+
+If you prefer not to set environment variables or named your profile `default`, run commands specifying your profile explicitly:
+
 ```bash
-aws sts get-caller-identity --profile renato_admin
+aws sso login --profile <your-profile-name>
+aws sts get-caller-identity --profile <your-profile-name>
 ```
 
 ---
 
 ## 🔧 Installation
+
 ### Create a virtual environment:
+
 ```bash
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
-venv\Scripts\activate  # Windows
+venv\Scripts ctivate     # Windows
 ```
 
 ### Install dependencies:
+
 ```bash
 pip install -r requirements.txt
 ```
